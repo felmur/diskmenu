@@ -22,4 +22,8 @@ The program is written in 6502-Assembly. The file to save on your disk is "MENU.
 
 # Compile from source
 To compile from source, you must use tass64 (find it [here](https://sourceforge.net/projects/tass64/)).
+```
+$> tass64 main.asm -o main.prg
+$> tass64 menu.asm -o menu.prg
+```
 
