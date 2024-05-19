@@ -1,3 +1,9 @@
+; --------------------------------------------------------
+; FM DISK MENU
+; (c) 2024 by Felice Murolo, Salerno, Italia
+; Licensed under LGPL license
+; --------------------------------------------------------
+
 *= $c000
 ; ----------------------------------------------------
 ; Routine principale
@@ -184,7 +190,7 @@ inp2							; cerca il carattere digitato nella stringa 'hex'
 				lda hex,x
 				cmp val
 				bne inp2
-				jsr runcmd		; la posizione del carattere è in X
+				jsr runcmd		; la posizione (nella stringa hex) del carattere digitato è in X
 				
 uscita				
 				jsr resetscreen
@@ -198,15 +204,15 @@ uscita
 ; ----------------------------------------------------
 runcmd
 .block
-				stx tmp1		
-				lda #<voci				
+				stx tmp1		; salva il valore della posizione (nella stringa hex) del carattere digitato
+				lda #<voci		; salva l'indirizzo di voci nelle due locazione libere di pagina 0				
 				sta $fb				
 				lda #>voci				
 				sta $fc				
 run1
-				lda $fb				
-				clc				
-				adc #17				
+				lda $fb			; salta il primo record in voci, che contiene il nome del disco				
+				clc				; poi questa parte viene utilizzata per trovare l'indirizzo del nome file selezionato in "voci"
+				adc #17			
 				sta $fb				
 				bcc run2				
 				lda $fc				
@@ -219,7 +225,7 @@ run2
 				dec tmp1
 				jmp run1
 run3								
-				jsr resetscreen				
+				jsr resetscreen	; l'indirizzo del nome del file è stato trovato, lo presentiamo a schermo				
 				lda #<label3				
 				ldy #>label3				
 				jsr $ab1e				
@@ -227,13 +233,13 @@ run3
 				ldy $fc
 				jsr $ab1e
 
-				ldy #0
+				ldy #0			; ora calcoliamno la lunghezza del nome del file fino al primo 0, che sarà caricata in A per la routine $FFBD
 run5
 				lda ($fb),y
 				beq run4
 				iny
 				jmp run5
-run4
+run4							; caricamento ed esecuzione file
 				tya
 				ldx $fb
 				ldy $fc
@@ -250,8 +256,6 @@ run4
 				sta $0200
 				sta $0201
 				sta $0202
-				
-				jsr resetscreen
 				
 				JSR $A659		; run
 				Jmp $A7AE
