@@ -18,7 +18,7 @@ The main routine resides starting at $C000. In case of reset, therefore, the pro
 SYS49152
 ```
 
-The program is written in 6502-Assembly. The file to save on your disk is "MENU.PRG".
+The program is written in 6502-Assembly. The only file you have to save on your disk is "MENU.PRG".
 
 # Compile from source
 To compile from source, you must use tass64 (find it [here](https://sourceforge.net/projects/tass64/)).
