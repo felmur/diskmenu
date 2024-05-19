@@ -26,4 +26,5 @@ To compile from source, you must use tass64 (find it [here](https://sourceforge.
 $> tass64 main.asm -o main.prg
 $> tass64 menu.asm -o menu.prg
 ```
-
+# Preview
+![Screenshot of FM DISK MENU]([https://myoctocat.com/assets/images/base-octocat.svg](https://github.com/felmur/diskmenu/edit/main/screenshot.png))
