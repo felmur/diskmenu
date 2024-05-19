@@ -27,4 +27,4 @@ $> tass64 main.asm -o main.prg
 $> tass64 menu.asm -o menu.prg
 ```
 # Preview
-![Screenshot of FM DISK MENU]([screenshot.png](screenshot.png))
+![Screenshot of FM DISK MENU](screenshot.png)
